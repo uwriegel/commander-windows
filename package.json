@@ -1,8 +1,8 @@
 {
     "name": "commander_windows",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "./build/Release/commander_windows",
     "author": "Uwe Riegel <uriegel@hotmail.de>",
     "gypfile": true,
-    "license": "MIT" 
+    "license": "MIT"
 }
