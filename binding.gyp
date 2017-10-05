@@ -1,6 +1,6 @@
 {
     "targets": [{
-        "target_name": "commander_windows",
+        "target_name": "commander_native",
         "sources": [ "./commander-node.cpp", "./windows.cpp", "./linux.cpp" ],
         "conditions": [
             ['OS=="win"', {'sources!': ['./linux.cpp']}],

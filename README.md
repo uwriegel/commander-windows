@@ -1,4 +1,4 @@
-commander-windows
+commander_native
 
 C++ plugin for file commander
 
@@ -18,9 +18,9 @@ npm publish
 
 DEMO:
 
-import * as commanderWindows from "commander_windows"
+import * as native from "commander_native"
 
-commanderWindows.getFiles("c:\\", (_, result) => {
+native.getFiles("c:\\", (_, result) => {
     const items = result.map(n => {
         return {
             displayName: n.displayName,

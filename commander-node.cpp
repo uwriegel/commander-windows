@@ -88,4 +88,4 @@ void init(Local<Object> exports) {
     NODE_SET_METHOD(exports, "getFiles", get_files);
 }
   
-NODE_MODULE(commander_windows, init)
+NODE_MODULE(commander_native, init)

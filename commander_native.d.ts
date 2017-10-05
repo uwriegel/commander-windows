@@ -6,6 +6,6 @@ interface FileItem {
     isHidden: boolean
 }
 
-declare module 'commander_windows' {
+declare module 'commander_native' {
     function getFiles(path: string, callback: (error: any, result: FileItem[]) => void): void
 }
