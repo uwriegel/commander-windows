@@ -4,5 +4,6 @@
     "main": "./build/Release/commander_windows",
     "author": "Uwe Riegel <uriegel@hotmail.de>",
     "gypfile": true,
+    "types": "commander_windows.d.ts",
     "license": "MIT" 
 }
