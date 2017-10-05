@@ -11,6 +11,10 @@ npm login
 npm publish
 
 UPDATE:
+npm login
+npm version <t>
+t: patch, minor, or major
+npm publish
 
 DEMO:
 

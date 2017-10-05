@@ -4,5 +4,5 @@
     "main": "./build/Release/commander_windows",
     "author": "Uwe Riegel <uriegel@hotmail.de>",
     "gypfile": true,
-    "license": "MIT"
+    "license": "MIT" 
 }
