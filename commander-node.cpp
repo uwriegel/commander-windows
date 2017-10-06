@@ -71,7 +71,7 @@ static void WorkAsyncComplete(uv_work_t *req, int status)
 void get_files(const FunctionCallbackInfo<Value>&args) {
     auto isolate = args.GetIsolate();
 
-    auto work = new Work{0};
+    auto work = new Work;
     work->request.data = work;
 
     String::Utf8Value s(args[0]);
