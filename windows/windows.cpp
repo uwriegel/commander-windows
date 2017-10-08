@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <utility>
-#include "native.h"
+#include "../native.h"
+#include "iconextractor.h"
 using namespace std;
 
 
@@ -28,4 +29,11 @@ vector<File_item> get_file_items(const wstring& directory) {
         results.push_back(item);
     }
     return move(results);
+}
+
+vector<char> extract_icon(const wstring& extension) {
+    gdiplus_initialize();
+	auto bytes = extract_icon(".docx"); 
+    gdiplus_uninitialize();
+    return bytes;
 }
