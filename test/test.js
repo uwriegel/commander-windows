@@ -30,11 +30,16 @@ try {
             console.log(error)
             return
         }
-        //fs.writeFileSync("test.png", result);
+        fs.writeFileSync("./test/test.png", result);
     })
 }
 catch (err) {
     console.log(err)
 }
+
+// setInterval(() => {
+//     console.log("Tick...")        
+//     global.gc()
+// }, 3000)
 
 console.log("End testing...")

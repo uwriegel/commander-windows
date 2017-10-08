@@ -1,3 +1,4 @@
 build
 node_modules
 commander_native-*.tgz
+test/test.png

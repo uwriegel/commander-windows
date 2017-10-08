@@ -4,7 +4,6 @@
 #include "iconextractor.h"
 using namespace std;
 
-
 uint64_t convertWindowsTimeToUnixTime(const FILETIME& ft) {
     ULARGE_INTEGER ull;
     ull.LowPart = ft.dwLowDateTime;
@@ -33,7 +32,7 @@ vector<File_item> get_file_items(const wstring& directory) {
 
 vector<char> get_icon(const wstring& extension) {
     gdiplus_initialize();
-	auto bytes = extract_icon(".docx"); 
+	auto bytes = extract_icon(extension); 
     gdiplus_uninitialize();
     return move(bytes);
 }
