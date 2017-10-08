@@ -31,9 +31,9 @@ vector<File_item> get_file_items(const wstring& directory) {
     return move(results);
 }
 
-vector<char> extract_icon(const wstring& extension) {
+vector<char> get_icon(const wstring& extension) {
     gdiplus_initialize();
 	auto bytes = extract_icon(".docx"); 
     gdiplus_uninitialize();
-    return bytes;
+    return move(bytes);
 }

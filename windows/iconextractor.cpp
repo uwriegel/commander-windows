@@ -37,7 +37,7 @@ void gdiplus_uninitialize()
 	GdiplusShutdown(gdiplus_token);
 }
 
-const vector<char> extract_icon(const string& icon_path)
+const vector<unsigned char> extract_icon(const string& icon_path)
 {
 	SHFILEINFOA file_info{ 0 };
 	SHGetFileInfo(icon_path.c_str(), FILE_ATTRIBUTE_NORMAL, &file_info, sizeof(file_info),
@@ -48,7 +48,7 @@ const vector<char> extract_icon(const string& icon_path)
 	result.bmp->Save(&ms, &png_clsid);
 	auto bytes = ms.get_bytes();
 	DestroyIcon(icon);
-	return bytes;
+	return move(bytes);
 }
 
 CLSID get_encoder_clsid(const wstring& format)

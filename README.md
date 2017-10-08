@@ -37,3 +37,15 @@ native.getFiles("c:\\", (_, result) => {
     })
     console.log(items)
 })
+
+
+TEST GC:
+
+setInterval(() => {
+    console.log("Tick...")        
+    global.gc()
+}, 3000)
+
+node --expose_gc test/test.js
+
+buffer_delete_callback has to be called

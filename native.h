@@ -12,4 +12,4 @@ struct File_item {
 };
 
 extern vector<File_item> get_file_items(const wstring& directory);
-extern vector<char> extract_icon(const wstring& extension);
+extern vector<char> get_icon(const wstring& extension);
