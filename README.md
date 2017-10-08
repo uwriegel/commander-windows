@@ -6,6 +6,9 @@ BUILD:
 node-gyp configure
 node-gyp build
 
+TEST PUBLISH:
+npm pack
+
 PUBLISH:
 npm login
 npm publish
