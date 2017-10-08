@@ -5,5 +5,8 @@
     "author": "Uwe Riegel <uriegel@hotmail.de>",
     "gypfile": true,
     "types": "commander_native.d.ts",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "nan": "^2.7.0"
+    }
 }

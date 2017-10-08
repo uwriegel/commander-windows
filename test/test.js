@@ -5,12 +5,13 @@ console.log("Start testing...")
 
 try {
     getFiles('/', (error, result) => {
-
+        console.log("Callback:")
         if (error) {
             console.log(error)
             return
         }
 
+        console.log(result.length)
         result.forEach(n => {
             console.log('')
             console.log('= NEW ======================')

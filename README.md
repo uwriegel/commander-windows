@@ -2,6 +2,8 @@ commander_native
 
 C++ plugin for file commander
 
+npm i -S nan 
+
 BUILD:
 node-gyp configure
 node-gyp build
