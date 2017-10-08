@@ -1,1 +1,7 @@
+build
+commander_native-*.tgz
+scripts
+
 test
+
+
