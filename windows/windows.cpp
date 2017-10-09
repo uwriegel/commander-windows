@@ -25,7 +25,8 @@ vector<File_item> get_file_items(const wstring& directory) {
             static_cast<uint64_t>(w32fd.nFileSizeHigh) << 32 | w32fd.nFileSizeLow,
             convertWindowsTimeToUnixTime(w32fd.ftLastWriteTime)
         };
-        results.push_back(item);
+        if (item.display_name != L".."s)
+            results.push_back(item);
     }
     return move(results);
 }
