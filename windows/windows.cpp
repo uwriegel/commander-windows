@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <sstream>
 #include <utility>
+#include <algorithm>
 #include "../native.h"
 #include "iconextractor.h"
 using namespace std;
@@ -60,3 +61,11 @@ wstring get_file_info_version(const wstring& file_name) {
     return move(result.str());
 }
 
+vector<wstring> get_file_info_versions(const wstring& path, const vector<wstring>& file_names) {
+    vector<wstring> infos;
+    transform(file_names.begin(), file_names.end(), back_inserter(infos), [path](const wstring& file)-> wstring {
+        wstring file_path = path + L"\\"s + file;
+        return get_file_info_version(file_path);
+    });
+    return move(infos);
+}

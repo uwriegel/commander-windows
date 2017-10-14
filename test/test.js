@@ -6,24 +6,35 @@ const getExtendedInfos  = require('../build/Release/commander_native').getExtend
 console.log("Start testing...")
 
 try {
-    // getFiles('/', (error, result) => {
-    //     console.log("Callback:")
-    //     if (error) {
-    //         console.log(error)
-    //         return
-    //     }
+    const path = 'c:\\windows\\system32\\'
+    getFiles(path, (error, result) => {
+        console.log("Callback:")
+        if (error) {
+            console.log(error)
+            return
+        }
 
-    //     console.log(result.length)
-    //     result.forEach(n => {
-    //         console.log('')
-    //         console.log('= NEW ======================')
-    //         console.log(n.displayName)
-    //         console.log(n.isDirectory)
-    //         console.log(n.isHidden)
-    //         console.log(n.size)
-    //         console.log(n.time)
-    //     })
-    // })
+        console.log(result.length)
+        result.forEach(n => {
+            console.log('')
+            console.log('= NEW ======================')
+            console.log(n.displayName)
+            console.log(n.isDirectory)
+            console.log(n.isHidden)
+            console.log(n.size)
+            console.log(n.time)
+        })
+
+        console.log("==============================================")
+        var files = result.filter(n => n.displayName.endsWith(".exe") || n.displayName.endsWith(".dll")).map(n => n.displayName)
+        console.log("==============================================")
+
+        getExtendedInfos(path, files, (err, res) => {
+            res.forEach(version => {
+                console.log(version)
+            })
+        })
+    })
 
     // getIcon(".html", (error, result) => {
     //     console.log("Callback:")
@@ -33,13 +44,6 @@ try {
     //     }
     //     fs.writeFileSync("./test/test.png", result);
     // })
-
-    getExtendedInfos("c:\\windows", [
-        "feile1.exe",
-        "feile2.exe",
-        "test.dll",
-        "bild.png"
-    ])
 }
 catch (err) {
     console.log(err)

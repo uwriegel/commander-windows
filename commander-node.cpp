@@ -32,7 +32,6 @@ NAN_METHOD(get_files) {
     AsyncQueueWorker(new Worker(callback, [directory, items]()-> void {
         *items = move(get_file_items(directory));
     }, [items](Nan::Callback* callback)-> void {
-
         Local<Array> result_list = New<Array>(items->size());
         int i{0};
         for(auto item: *items) {
@@ -88,9 +87,20 @@ NAN_METHOD(get_extended_infos) {
         }
     }
 
-    // Exe und dlls: versions
-    // 2 threads
-    // jpg: linux und windows: exif    
+    auto callback = new Callback(info[2].As<Function>());
+    auto result = make_shared<vector<wstring>>();
+    AsyncQueueWorker(new Worker(callback, [path_name, files, result]()-> void {
+        *result = get_file_info_versions(path_name, files);
+    }, [result](Nan::Callback* callback)-> void {
+        Local<Array> result_list = New<Array>(result->size());
+        int i{0};
+        for(auto item: *result) 
+            result_list->Set(i++, New<String>(ws2utf8(item).c_str()).ToLocalChecked());
+
+        // set up return arguments
+        Local<Value> argv[] = { Nan::Null(), result_list };
+        callback->Call(2, argv);        
+    }));
 }
 
 NAN_MODULE_INIT(init) {
