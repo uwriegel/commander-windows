@@ -12,7 +12,10 @@
             "<!(node -e \"require('nan')\")"
         ],
         "cflags": ["-Wall", "-std=c++14"],
-        "libraries": [ "gdiplus.lib" ],
+        "libraries": [ 
+            "gdiplus.lib",
+            "Mincore.lib"
+        ],
         "conditions": [
             ['OS=="win"', {
                     'sources!': ['./linux/linux.cpp']
@@ -24,7 +27,10 @@
                         './windows/iconextractor.cpp',
                         "./windows/memorystream.cpp"
                     ],
-                    'libraries!': [ "gdiplus.lib" ]
+                    'libraries!': [ 
+                        "gdiplus.lib",
+                        "Mincore.lib"
+                    ]
                 }
             ],
         ]  

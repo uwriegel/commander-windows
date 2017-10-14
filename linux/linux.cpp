@@ -14,3 +14,7 @@ vector<char> get_icon(const wstring& extension) {
 
     return move(results);
 }
+
+wstring get_file_info_version(const wstring& file_name) {
+    return L""s;
+}

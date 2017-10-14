@@ -59,7 +59,6 @@ void buffer_delete_callback(char* unused, void* the_vector) {
 }
 
 NAN_METHOD(get_icon) {
-    
     Utf8String val(To<String>(info[0]).ToLocalChecked());
     auto extension = utf82ws(*val);
 
@@ -75,6 +74,25 @@ NAN_METHOD(get_icon) {
     }));
 }
 
+NAN_METHOD(get_extended_infos) {
+    Utf8String val(To<String>(info[0]).ToLocalChecked());
+    auto path_name = utf82ws(*val);
+
+    vector<wstring> files;
+    auto array = Local<Array>::Cast(info[1]);
+    for (auto i = 0u; i < array->Length(); i++ ) {
+        if (Nan::Has(array, i).FromJust()) {
+            Local<String> local_string = (Nan::To<String>(Nan::Get(array, i).ToLocalChecked())).ToLocalChecked();
+            Nan::Utf8String val(local_string);
+            files.push_back(move(utf82ws(*val)));
+        }
+    }
+
+    // Exe und dlls: versions
+    // 2 threads
+    // jpg: linux und windows: exif    
+}
+
 NAN_MODULE_INIT(init) {
     Nan::Set(target,
         New<String>("getFiles").ToLocalChecked(),
@@ -82,6 +100,9 @@ NAN_MODULE_INIT(init) {
     Nan::Set(target,
         New<String>("getIcon").ToLocalChecked(),
         GetFunction(New<FunctionTemplate>(get_icon)).ToLocalChecked());
+    Nan::Set(target,
+        New<String>("getExtendedInfos").ToLocalChecked(),
+        GetFunction(New<FunctionTemplate>(get_extended_infos)).ToLocalChecked());
 }
   
 NODE_MODULE(commander_native, init)
