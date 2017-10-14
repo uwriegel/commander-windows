@@ -2,6 +2,7 @@
 #include <sstream>
 #include <utility>
 #include <algorithm>
+#include <iterator>
 #include "../native.h"
 #include "iconextractor.h"
 using namespace std;
