@@ -5,7 +5,7 @@
             "./commander-node.cpp", 
             "./worker.cpp", 
             "./windows/windows.cpp", 
-            "./windows/iconextractor245.cpp", 
+            "./windows/iconextractor.cpp", 
             "./windows/memorystream.cpp", 
             "./linux/linux.cpp" ],
         "include_dirs": [
