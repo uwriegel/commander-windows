@@ -45,7 +45,6 @@ vector<char> get_icon(const wstring& extension) {
 }
 
 wstring get_file_info_version(const wstring& file_name) {
-    
     DWORD _{0};
     auto size = GetFileVersionInfoSize(file_name.c_str(), &_);
     if (size == 0)
