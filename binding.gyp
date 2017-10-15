@@ -15,7 +15,7 @@
         'link_settings': {
             "libraries": [ 
                 "gdiplus.lib",
-                "Minncore.lib"
+                "Mincore.lib"
             ]
         },
         "conditions": [
