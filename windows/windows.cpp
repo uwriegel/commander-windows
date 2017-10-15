@@ -1,3 +1,6 @@
+#define UNICODE
+#define _UNICODE
+#include <SDKDDKVer.h>
 #include <windows.h>
 #include <sstream>
 #include <utility>
@@ -43,14 +46,14 @@ vector<char> get_icon(const wstring& extension) {
 
 wstring get_file_info_version(const wstring& file_name) {
     DWORD _{0};
-    auto size = GetFileVersionInfoSizeW(file_name.c_str(), &_);
+    auto size = GetFileVersionInfoSize(file_name.c_str(), &_);
     if (size == 0)
         return L""s;
 	vector<char> data(size);
-	auto ok = GetFileVersionInfoW(file_name.c_str(), 0, size, data.data());
+	auto ok = GetFileVersionInfo(file_name.c_str(), 0, size, data.data());
 	VS_FIXEDFILEINFO *info{nullptr};
 	uint32_t len{0};
-	VerQueryValueW(data.data(), L"\\", reinterpret_cast<void**>(&info), &len);
+	VerQueryValue(data.data(), L"\\", reinterpret_cast<void**>(&info), &len);
 
 	int file_major = HIWORD(info->dwFileVersionMS);
 	int file_minor = LOWORD(info->dwFileVersionMS);
