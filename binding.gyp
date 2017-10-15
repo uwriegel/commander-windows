@@ -12,10 +12,12 @@
             "<!(node -e \"require('nan')\")"
         ],
         "cflags": ["-Wall", "-std=c++14"],
-        "libraries": [ 
-            "gdiplus.lib",
-            "Mincore.lib"
-        ],
+        'link_settings': {
+            "libraries": [ 
+                "gdiplus.lib",
+                "Mincore.lib"
+            ]
+        },
         "conditions": [
             ['OS=="win"', {
                     'sources!': ['./linux/linux.cpp']
