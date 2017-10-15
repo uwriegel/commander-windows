@@ -1,6 +1,6 @@
 {
     "name": "commander_native",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "main": "./build/Release/commander_native",
     "author": "Uwe Riegel <uriegel@hotmail.de>",
     "gypfile": true,
