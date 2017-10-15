@@ -1,6 +1,3 @@
-#define UNICODE
-#define _UNICODE
-#include <SDKDDKVer.h>
 #include <windows.h>
 #include <sstream>
 #include <utility>
@@ -9,6 +6,29 @@
 #include "../native.h"
 #include "iconextractor.h"
 using namespace std;
+
+using GetFileVersionInfoSizeFunction = DWORD (__stdcall*)(const wchar_t* filename, DWORD* handle);
+using GetFileVersionInfoFunction = BOOL (__stdcall*)(const wchar_t* filename, DWORD nill, DWORD length, void* data);
+using VerQueryValueFunction = BOOL (__stdcall*)(void* block, const wchar_t* sub_block, void** buffer, UINT* length);
+
+GetFileVersionInfoSizeFunction create_get_file_version_info_size() {
+    auto module = LoadLibraryW(L"Api-ms-win-core-version-l1-1-0.dll");
+    return reinterpret_cast<GetFileVersionInfoSizeFunction>(GetProcAddress(module, "GetFileVersionInfoSizeW"));
+}
+
+GetFileVersionInfoFunction create_get_file_version_info() {
+    auto module = LoadLibraryW(L"Api-ms-win-core-version-l1-1-0.dll");
+    return reinterpret_cast<GetFileVersionInfoFunction>(GetProcAddress(module, "GetFileVersionInfoW"));
+}
+
+VerQueryValueFunction create_ver_query_value() {
+    auto module = LoadLibraryW(L"Api-ms-win-core-version-l1-1-0.dll");
+    return reinterpret_cast<VerQueryValueFunction>(GetProcAddress(module, "VerQueryValueW"));
+}
+
+static GetFileVersionInfoSizeFunction get_file_version_info_size{create_get_file_version_info_size()};
+static GetFileVersionInfoFunction get_file_version_info{create_get_file_version_info()};
+static VerQueryValueFunction ver_query_value{create_ver_query_value()};
 
 uint64_t convertWindowsTimeToUnixTime(const FILETIME& ft) {
     ULARGE_INTEGER ull;
@@ -46,14 +66,14 @@ vector<char> get_icon(const wstring& extension) {
 
 wstring get_file_info_version(const wstring& file_name) {
     DWORD _{0};
-    auto size = GetFileVersionInfoSize(file_name.c_str(), &_);
+    auto size = get_file_version_info_size(file_name.c_str(), &_);
     if (size == 0)
         return L""s;
 	vector<char> data(size);
-	auto ok = GetFileVersionInfo(file_name.c_str(), 0, size, data.data());
+	auto ok = get_file_version_info(file_name.c_str(), 0, size, data.data());
 	VS_FIXEDFILEINFO *info{nullptr};
 	uint32_t len{0};
-	VerQueryValue(data.data(), L"\\", reinterpret_cast<void**>(&info), &len);
+	ver_query_value(data.data(), L"\\", reinterpret_cast<void**>(&info), &len);
 
 	int file_major = HIWORD(info->dwFileVersionMS);
 	int file_minor = LOWORD(info->dwFileVersionMS);

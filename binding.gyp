@@ -14,8 +14,7 @@
         "cflags": ["-Wall", "-std=c++14"],
         'link_settings': {
             "libraries": [ 
-                "gdiplus.lib",
-                "Mincore.lib"
+                "gdiplus.lib"
             ]
         },
         "conditions": [
@@ -30,8 +29,7 @@
                         "./windows/memorystream.cpp"
                     ],
                     'libraries!': [ 
-                        "gdiplus.lib",
-                        "Mincore.lib"
+                        "gdiplus.lib"
                     ]
                 }
             ],
