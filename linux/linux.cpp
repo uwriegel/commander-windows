@@ -16,9 +16,9 @@ vector<char> get_icon(const wstring& extension) {
 }
 
 wstring get_file_info_version(const wstring& file_name) {
-    return L""s;
+    return L"";
 }
 
 vector<wstring> get_file_info_versions(const wstring& path, const vector<wstring>& file_names) {
-    return vector<wstring>;
+    return vector<wstring>();
 }
